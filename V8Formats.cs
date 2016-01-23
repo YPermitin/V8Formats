@@ -10,7 +10,7 @@ namespace DevelPlatform.OneCEUtils.V8Formats
     public class V8Formats
     {        
         public static readonly string V8P_VERSION = "1.0";
-        public static readonly string V8P_RIGHT = "YPermitin (ypermitin@yandex.ru) www.develplatform.com\n PSPlehanov (psplehanov@mail.ru)";
+        public static readonly string V8P_RIGHT = "YPermitin (ypermitin@yandex.ru) www.develplatform.ru\n PSPlehanov (psplehanov@mail.ru)";
 
         public class CONF_ERF_EPF
         {
