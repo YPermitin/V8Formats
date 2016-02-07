@@ -17,7 +17,7 @@ namespace DevelPlatform
             message.AppendFormat("V8Formats Version {0} Copyright (c)\n {1}", V8Formats.V8P_VERSION, V8Formats.V8P_RIGHT);
             message.AppendLine();
             message.AppendLine();
-            message.AppendLine("Unpack, pack, deflate and inflate 1C v8 file (*.cf)");
+            message.AppendLine("Unpack, pack, deflate and inflate 1C v8 file (*.cf),(*.epf),(*.erf)");
             message.AppendLine();
             message.AppendLine("V8UNPACK");
             message.AppendLine();            
@@ -61,27 +61,27 @@ namespace DevelPlatform
                     version();
             } else if (cur_mode == "-inflate" || cur_mode == "-i" || cur_mode == "-und" || cur_mode == "-undeflate") {
 
-                V8Formats.CONF_ERF_EPF V8File = new V8Formats.CONF_ERF_EPF();
+                V8Formats.V8File V8File = new V8Formats.V8File();
                 V8File.Inflate(args[1], args[2]);
                 return;
             } else if (cur_mode == "-deflate" || cur_mode == "-d") {
-                V8Formats.CONF_ERF_EPF V8File = new V8Formats.CONF_ERF_EPF();
+                V8Formats.V8File V8File = new V8Formats.V8File();
                 V8File.Deflate(args[1], args[2]);
             } else if (cur_mode == "-unpack" || cur_mode == "-u" || cur_mode == "-unp") {
 
-                V8Formats.CONF_ERF_EPF V8File = new V8Formats.CONF_ERF_EPF();
+                V8Formats.V8File V8File = new V8Formats.V8File();
                 V8File.UnpackToFolder(args[1], args[2], null, true);
             } else if (cur_mode == "-pack" || cur_mode == "-pa") {
 
-                V8Formats.CONF_ERF_EPF V8File = new V8Formats.CONF_ERF_EPF();
+                V8Formats.V8File V8File = new V8Formats.V8File();
                 V8File.PackFromFolder(args[1], args[2]);
             } else if (cur_mode == "-parse" || cur_mode == "-p") {
-                V8Formats.CONF_ERF_EPF V8File = new V8Formats.CONF_ERF_EPF();
+                V8Formats.V8File V8File = new V8Formats.V8File();
                 V8File.Parse(args[1], args[2]);
             } else if (cur_mode == "-build" || cur_mode == "-b") {
-                V8Formats.CONF_ERF_EPF V8File = new V8Formats.CONF_ERF_EPF();
+                V8Formats.V8File V8File = new V8Formats.V8File();
                 int ret = V8File.Build(args[1], args[2]);
-                if (ret == V8Formats.CONF_ERF_EPF.SHOW_USAGE)
+                if (ret == V8Formats.V8File.SHOW_USAGE)
                     usage();
             } else if (cur_mode == "-bat") {
                 StringBuilder message = new StringBuilder();

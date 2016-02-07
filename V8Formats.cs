@@ -12,7 +12,7 @@ namespace DevelPlatform.OneCEUtils.V8Formats
         public static readonly string V8P_VERSION = "1.0";
         public static readonly string V8P_RIGHT = "YPermitin (ypermitin@yandex.ru) www.develplatform.ru\n PSPlehanov (psplehanov@mail.ru)";
 
-        public class CONF_ERF_EPF
+        public class V8File
         {
             #region variables
             public static readonly int V8UNPACK_ERROR = -50;
@@ -182,14 +182,14 @@ namespace DevelPlatform.OneCEUtils.V8Formats
             List<CV8Elem> Elems;
             bool IsDataPacked;
 
-            public CONF_ERF_EPF()
+            public V8File()
             {
                 this.IsDataPacked = true;
                 Elems = new List<CV8Elem>();
                 ElemsAddrs = new List<stElemAddr>();
             }
 
-            public CONF_ERF_EPF(byte[] pFileData, int InflateSize, bool boolInflate = true)
+            public V8File(byte[] pFileData, int InflateSize, bool boolInflate = true)
             {
                 this.IsDataPacked = true;
                 Elems = new List<CV8Elem>();
@@ -515,7 +515,7 @@ namespace DevelPlatform.OneCEUtils.V8Formats
                         if (ret != 0)
                             return ret;
 
-                        elem.UnpackedData = new CONF_ERF_EPF();
+                        elem.UnpackedData = new V8File();
                         elem.IsV8File = false;
                         elem.pData = DeflateBuffer;
                         elem.DataSize = (UInt32)DeflateBuffer.Length;
@@ -643,7 +643,7 @@ namespace DevelPlatform.OneCEUtils.V8Formats
 
             int SetElemName(CV8Elem Elem, string ElemName, int ElemNameLen)
             {
-                UInt32 stElemHeaderBeginSize = CONF_ERF_EPF.CV8Elem.stElemHeaderBegin.Size();
+                UInt32 stElemHeaderBeginSize = V8File.CV8Elem.stElemHeaderBegin.Size();
 
                 for (int j = 0; j <ElemNameLen * 2; j+=2, stElemHeaderBeginSize+=2)
                 {
@@ -701,7 +701,7 @@ namespace DevelPlatform.OneCEUtils.V8Formats
                     
                     CV8Elem elem = new CV8Elem();
 
-                    elem.HeaderSize = CONF_ERF_EPF.CV8Elem.stElemHeaderBegin.Size() + (UInt32)srcFileInfo.Name.Length * 2 + 4;
+                    elem.HeaderSize = V8File.CV8Elem.stElemHeaderBegin.Size() + (UInt32)srcFileInfo.Name.Length * 2 + 4;
                     elem.pHeader = new byte[elem.HeaderSize];                  
 
                     SetElemName(elem, srcFileInfo.Name, srcFileInfo.Name.Length);
@@ -724,13 +724,13 @@ namespace DevelPlatform.OneCEUtils.V8Formats
                     
                     CV8Elem elem = new CV8Elem();
 
-                    elem.HeaderSize = CONF_ERF_EPF.CV8Elem.stElemHeaderBegin.Size() + (UInt32)dirInfo.Name.Length * 2 + 4;
+                    elem.HeaderSize = V8File.CV8Elem.stElemHeaderBegin.Size() + (UInt32)dirInfo.Name.Length * 2 + 4;
                     elem.pHeader = new byte[elem.HeaderSize];
 
                     SetElemName(elem, dirInfo.Name, dirInfo.Name.Length);
 
                     elem.IsV8File = true;
-                    elem.UnpackedData = new CONF_ERF_EPF();
+                    elem.UnpackedData = new V8File();
                     elem.UnpackedData.LoadFileFromFolder(srcDir);
 
                     this.Elems.Add(elem);
@@ -1091,7 +1091,7 @@ namespace DevelPlatform.OneCEUtils.V8Formats
                         //ReadBlockData(pFileData, null, out pData, out DataSize);
                     }
 
-                    CV8Elem elem = new CV8Elem(pElemsAddrsBytesHeader, ElemsAddrsSizeHeader, pData, (UInt32)pData.Length, new V8Formats.CONF_ERF_EPF(), false, false);
+                    CV8Elem elem = new CV8Elem(pElemsAddrsBytesHeader, ElemsAddrsSizeHeader, pData, (UInt32)pData.Length, new V8Formats.V8File(), false, false);
 
                     if (boolInflate && IsDataPacked) {
                         ret = Inflate(pData, out InflateBuffer, DataSize, out InflateSize);
@@ -1108,7 +1108,7 @@ namespace DevelPlatform.OneCEUtils.V8Formats
                             elem.NeedUnpack = false; // отложенная распаковка не нужна
                             elem.pData = null; //нераспакованные данные больше не нужны
                             if (IsV8File(InflateBuffer, (int)InflateSize)) {
-                                elem.UnpackedData = new CONF_ERF_EPF(InflateBuffer, (int)InflateSize, boolInflate);
+                                elem.UnpackedData = new V8File(InflateBuffer, (int)InflateSize, boolInflate);
                                 elem.pData = null;
                                 elem.IsV8File = true;
                             } else {
@@ -1226,7 +1226,7 @@ namespace DevelPlatform.OneCEUtils.V8Formats
                     Array.Copy(pFileData, adr, pBlockData, read_in_bytes, bytes_to_read);
                     read_in_bytes += bytes_to_read;
 
-                    if (next_page_addr != V8Formats.CONF_ERF_EPF.V8_FF_SIGNATURE) // есть следующая страница
+                    if (next_page_addr != V8Formats.V8File.V8_FF_SIGNATURE) // есть следующая страница
                     {
                         adr = next_page_addr + stBlockHeader.Size();
                         pBlockHeader = new stBlockHeader(pFileData, next_page_addr);
@@ -1276,7 +1276,7 @@ namespace DevelPlatform.OneCEUtils.V8Formats
                     this.DataSize = 0;
                 }
 
-                public CV8Elem(byte[] pHeader, UInt32 HeaderSize, byte[] pData, UInt32 DataSize, CONF_ERF_EPF UnpackedData, bool IsV8File, bool NeedUnpack)
+                public CV8Elem(byte[] pHeader, UInt32 HeaderSize, byte[] pData, UInt32 DataSize, V8File UnpackedData, bool IsV8File, bool NeedUnpack)
                 {
                     this.pHeader = pHeader;
                     this.HeaderSize = HeaderSize;
@@ -1338,7 +1338,7 @@ namespace DevelPlatform.OneCEUtils.V8Formats
                 public UInt32 HeaderSize;
                 public byte[] pData; // TODO: Утечка памяти
                 public UInt32 DataSize;
-                public CONF_ERF_EPF UnpackedData;
+                public V8File UnpackedData;
                 public bool IsV8File;
                 public bool NeedUnpack;
 
