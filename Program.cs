@@ -9,17 +9,17 @@ using System.IO;
 
 namespace DevelPlatform
 {
-    class V8UnpackProgram
+    class V8Formats
     {
         static void usage()
         {
             StringBuilder message = new StringBuilder();
-            message.AppendFormat("V8Formats Version {0} Copyright (c)\n {1}", V8Formats.V8P_VERSION, V8Formats.V8P_RIGHT);
+            message.AppendFormat("V8Formats Version {0} Copyright (c)\n {1}", OneCEUtils.V8Formats.V8Formats.V8P_VERSION, OneCEUtils.V8Formats.V8Formats.V8P_RIGHT);
             message.AppendLine();
             message.AppendLine();
             message.AppendLine("Unpack, pack, deflate and inflate 1C v8 file (*.cf),(*.epf),(*.erf)");
             message.AppendLine();
-            message.AppendLine("V8UNPACK");
+            message.AppendLine("V8FORMATS");
             message.AppendLine();            
             message.AppendLine("  -U[NPACK]     in_filename.cf     out_dirname");
             message.AppendLine("  -PA[CK]       in_dirname         out_filename.cf");
@@ -36,7 +36,7 @@ namespace DevelPlatform
 
         static void version()
         {
-            Console.WriteLine(V8Formats.V8P_VERSION);
+            Console.WriteLine(OneCEUtils.V8Formats.V8Formats.V8P_VERSION);
         }
 
         static void Main(string[] args)
@@ -61,27 +61,27 @@ namespace DevelPlatform
                     version();
             } else if (cur_mode == "-inflate" || cur_mode == "-i" || cur_mode == "-und" || cur_mode == "-undeflate") {
 
-                V8Formats.V8File V8File = new V8Formats.V8File();
+                OneCEUtils.V8Formats.V8Formats.V8File V8File = new OneCEUtils.V8Formats.V8Formats.V8File();
                 V8File.Inflate(args[1], args[2]);
                 return;
             } else if (cur_mode == "-deflate" || cur_mode == "-d") {
-                V8Formats.V8File V8File = new V8Formats.V8File();
+                OneCEUtils.V8Formats.V8Formats.V8File V8File = new OneCEUtils.V8Formats.V8Formats.V8File();
                 V8File.Deflate(args[1], args[2]);
             } else if (cur_mode == "-unpack" || cur_mode == "-u" || cur_mode == "-unp") {
 
-                V8Formats.V8File V8File = new V8Formats.V8File();
+                OneCEUtils.V8Formats.V8Formats.V8File V8File = new OneCEUtils.V8Formats.V8Formats.V8File();
                 V8File.UnpackToFolder(args[1], args[2], null, true);
             } else if (cur_mode == "-pack" || cur_mode == "-pa") {
 
-                V8Formats.V8File V8File = new V8Formats.V8File();
+                OneCEUtils.V8Formats.V8Formats.V8File V8File = new OneCEUtils.V8Formats.V8Formats.V8File();
                 V8File.PackFromFolder(args[1], args[2]);
             } else if (cur_mode == "-parse" || cur_mode == "-p") {
-                V8Formats.V8File V8File = new V8Formats.V8File();
+                OneCEUtils.V8Formats.V8Formats.V8File V8File = new OneCEUtils.V8Formats.V8Formats.V8File();
                 V8File.Parse(args[1], args[2]);
             } else if (cur_mode == "-build" || cur_mode == "-b") {
-                V8Formats.V8File V8File = new V8Formats.V8File();
+                OneCEUtils.V8Formats.V8Formats.V8File V8File = new OneCEUtils.V8Formats.V8Formats.V8File();
                 int ret = V8File.Build(args[1], args[2]);
-                if (ret == V8Formats.V8File.SHOW_USAGE)
+                if (ret == OneCEUtils.V8Formats.V8Formats.V8File.SHOW_USAGE)
                     usage();
             } else if (cur_mode == "-bat") {
                 StringBuilder message = new StringBuilder();
@@ -90,16 +90,16 @@ namespace DevelPlatform
                 message.AppendLine();
                 message.AppendLine();
                 message.AppendLine(":UNPACK");
-                message.AppendLine("V8Unpack.exe -unpack      %2                              %2.unp");
-                message.AppendLine("V8Unpack.exe -undeflate   %2.unp\\metadata.data            %2.unp\\metadata.data.und");
-                message.AppendLine("V8Unpack.exe -unpack      %2.unp\\metadata.data.und        %2.unp\\metadata.unp");
+                message.AppendLine("V8Formats.exe -unpack      %2                              %2.unp");
+                message.AppendLine("V8Formats.exe -undeflate   %2.unp\\metadata.data            %2.unp\\metadata.data.und");
+                message.AppendLine("V8Formats.exe -unpack      %2.unp\\metadata.data.und        %2.unp\\metadata.unp");
                 message.AppendLine("GOTO END");
                 message.AppendLine();
                 message.AppendLine();
                 message.AppendLine(":PACK");
-                message.AppendLine("V8Unpack.exe -pack        %2.unp\\metadata.unp            %2.unp\\metadata_new.data.und");
-                message.AppendLine("V8Unpack.exe -deflate     %2.unp\\metadata_new.data.und   %2.unp\\metadata.data");
-                message.AppendLine("V8Unpack.exe -pack        %2.unp                         %2.new.cf");
+                message.AppendLine("V8Formats.exe -pack        %2.unp\\metadata.unp            %2.unp\\metadata_new.data.und");
+                message.AppendLine("V8Formats.exe -deflate     %2.unp\\metadata_new.data.und   %2.unp\\metadata.data");
+                message.AppendLine("V8Formats.exe -pack        %2.unp                         %2.new.cf");
                 message.AppendLine();
                 message.AppendLine();
                 message.AppendLine(":END");
@@ -110,15 +110,15 @@ namespace DevelPlatform
                 message.AppendLine();
                 message.AppendLine();
                 message.AppendLine("UNPACK");
-                message.AppendLine("V8Unpack.exe -unpack      1Cv8.cf                          1Cv8.unp" );
-                message.AppendLine("V8Unpack.exe -undeflate   1Cv8.unp\\metadata.data          1Cv8.unp\\metadata.data.und");
-                message.AppendLine("V8Unpack.exe -unpack      1Cv8.unp\\metadata.data.und      1Cv8.unp\\metadata.unp");
+                message.AppendLine("V8Formats.exe -unpack      1Cv8.cf                          1Cv8.unp");
+                message.AppendLine("V8Formats.exe -undeflate   1Cv8.unp\\metadata.data          1Cv8.unp\\metadata.data.und");
+                message.AppendLine("V8Formats.exe -unpack      1Cv8.unp\\metadata.data.und      1Cv8.unp\\metadata.unp");
                 message.AppendLine();
                 message.AppendLine();
                 message.AppendLine("PACK");
-                message.AppendLine("V8Unpack.exe -pack        1Cv8.unp\\metadata.unp           1Cv8.unp\\metadata_new.data.und");
-                message.AppendLine("V8Unpack.exe -deflate     1Cv8.unp\\metadata_new.data.und  1Cv8.unp\\metadata.data");
-                message.AppendLine("V8Unpack.exe -pack        1Cv8.und                         1Cv8_new.cf");
+                message.AppendLine("V8Formats.exe -pack        1Cv8.unp\\metadata.unp           1Cv8.unp\\metadata_new.data.und");
+                message.AppendLine("V8Formats.exe -deflate     1Cv8.unp\\metadata_new.data.und  1Cv8.unp\\metadata.data");
+                message.AppendLine("V8Formats.exe -pack        1Cv8.und                         1Cv8_new.cf");
                 message.AppendLine();
                 message.AppendLine();
 
