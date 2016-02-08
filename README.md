@@ -21,15 +21,15 @@ Unpack, pack, deflate and inflate 1C v8 file (*.cf),(*.epf),(*.erf)
 
 V8FORMATS
 
-  -U[NPACK]     in_filename.cf     out_dirname
-  -PA[CK]       in_dirname         out_filename.cf
-  -I[NFLATE]    in_filename.data   out_filename
-  -D[EFLATE]    in_filename        filename.data
-  -E[XAMPLE]
-  -BAT
-  -P[ARSE]      in_filename        out_dirname
-  -B[UILD]      in_dirname         out_filename
-  -V[ERSION]
+- U[NPACK]     in_filename.cf     out_dirname
+- PA[CK]       in_dirname         out_filename.cf
+- I[NFLATE]    in_filename.data   out_filename
+- D[EFLATE]    in_filename        filename.data
+- E[XAMPLE]
+- BAT
+- P[ARSE]      in_filename        out_dirname
+- B[UILD]      in_dirname         out_filename
+- V[ERSION]
 
 # TODO
 В будущем добавявятся возможности работы с форматами файлов *.GRS (включая визуализацию) и *.MXL, а также оптимизация существующего кода в части использования памяти.
