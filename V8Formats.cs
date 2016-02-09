@@ -1087,7 +1087,7 @@ namespace DevelPlatform.OneCEUtils.V8Formats
                     }
                     else
                     {
-                        throw new Exception("Ебать копать!!!");
+                        throw new Exception("Некорректный блок данных!");
                         //ReadBlockData(pFileData, null, out pData, out DataSize);
                     }
 
