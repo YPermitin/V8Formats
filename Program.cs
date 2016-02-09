@@ -126,7 +126,7 @@ namespace DevelPlatform
             } else
                 usage();
 
-            Console.WriteLine("Press any key for exit...");
+            Console.WriteLine("Press any key for exit...?");
             Console.ReadKey();
         }
     }
