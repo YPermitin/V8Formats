@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "V8FormatsProgram", "V8FormatsProgram.csproj", "{F9DFBDFF-4619-431F-B90E-00A2AF473924}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "V8FormatsApp", "V8FormatsApp.csproj", "{F9DFBDFF-4619-431F-B90E-00A2AF473924}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Library", "Library", "{3EC7B064-01A3-4396-AB9E-30C7C8323BC0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -18,5 +20,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{F9DFBDFF-4619-431F-B90E-00A2AF473924} = {3EC7B064-01A3-4396-AB9E-30C7C8323BC0}
 	EndGlobalSection
 EndGlobal

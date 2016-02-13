@@ -20,7 +20,7 @@ namespace DevelPlatform
             message.AppendLine("Unpack, pack, deflate and inflate 1C v8 file (*.cf),(*.epf),(*.erf)");
             message.AppendLine();
             message.AppendLine("V8FORMATS");
-            message.AppendLine();            
+            message.AppendLine();
             message.AppendLine("  -U[NPACK]     in_filename.cf     out_dirname");
             message.AppendLine("  -PA[CK]       in_dirname         out_filename.cf");
             message.AppendLine("  -I[NFLATE]    in_filename.data   out_filename");
@@ -57,33 +57,42 @@ namespace DevelPlatform
 
             cur_mode = cur_mode.ToLower();
 
-            if (cur_mode == "-version" || cur_mode == "-v") {
-                    version();
-            } else if (cur_mode == "-inflate" || cur_mode == "-i" || cur_mode == "-und" || cur_mode == "-undeflate") {
-
+            if (cur_mode == "-version" || cur_mode == "-v")
+            {
+                version();
+            }
+            else if (cur_mode == "-inflate" || cur_mode == "-i" || cur_mode == "-und" || cur_mode == "-undeflate")
+            {
                 OneCEUtils.V8Formats.V8Formats.V8File V8File = new OneCEUtils.V8Formats.V8Formats.V8File();
-                V8File.Inflate(args[1], args[2]);
-                return;
-            } else if (cur_mode == "-deflate" || cur_mode == "-d") {
+                V8File.Inflate(args[1], args[2], true);
+            }
+            else if (cur_mode == "-deflate" || cur_mode == "-d")
+            {
                 OneCEUtils.V8Formats.V8Formats.V8File V8File = new OneCEUtils.V8Formats.V8Formats.V8File();
-                V8File.Deflate(args[1], args[2]);
-            } else if (cur_mode == "-unpack" || cur_mode == "-u" || cur_mode == "-unp") {
-
+                V8File.Deflate(args[1], args[2], true);
+            }
+            else if (cur_mode == "-unpack" || cur_mode == "-u" || cur_mode == "-unp")
+            {
                 OneCEUtils.V8Formats.V8Formats.V8File V8File = new OneCEUtils.V8Formats.V8Formats.V8File();
-                V8File.UnpackToFolder(args[1], args[2], null, true);
-            } else if (cur_mode == "-pack" || cur_mode == "-pa") {
-
+                V8File.UnpackToFolder(args[1], args[2], null, true, true);
+            }
+            else if (cur_mode == "-pack" || cur_mode == "-pa")
+            {
                 OneCEUtils.V8Formats.V8Formats.V8File V8File = new OneCEUtils.V8Formats.V8Formats.V8File();
-                V8File.PackFromFolder(args[1], args[2]);
-            } else if (cur_mode == "-parse" || cur_mode == "-p") {
+                V8File.PackFromFolder(args[1], args[2], true);
+            }
+            else if (cur_mode == "-parse" || cur_mode == "-p")
+            {
                 OneCEUtils.V8Formats.V8Formats.V8File V8File = new OneCEUtils.V8Formats.V8Formats.V8File();
-                V8File.Parse(args[1], args[2]);
-            } else if (cur_mode == "-build" || cur_mode == "-b") {
+                V8File.Parse(args[1], args[2], 0, true);
+            }
+            else if (cur_mode == "-build" || cur_mode == "-b")
+            {
                 OneCEUtils.V8Formats.V8Formats.V8File V8File = new OneCEUtils.V8Formats.V8Formats.V8File();
-                int ret = V8File.Build(args[1], args[2]);
-                if (ret == OneCEUtils.V8Formats.V8Formats.V8File.SHOW_USAGE)
-                    usage();
-            } else if (cur_mode == "-bat") {
+                V8File.Build(args[1], args[2], 0, true);
+            }
+            else if (cur_mode == "-bat")
+            {
                 StringBuilder message = new StringBuilder();
                 message.AppendLine("if %1 == P GOTO PACK");
                 message.AppendLine("if %1 == p GOTO PACK");
@@ -104,8 +113,10 @@ namespace DevelPlatform
                 message.AppendLine();
                 message.AppendLine(":END");
 
-                Console.WriteLine(message.ToString());
-            } else if (cur_mode == "-example" || cur_mode == "-e") {
+                Console.WriteLine(message.ToString()); 
+            }
+            else if (cur_mode == "-example" || cur_mode == "-e")
+            {
                 StringBuilder message = new StringBuilder();
                 message.AppendLine();
                 message.AppendLine();
@@ -123,7 +134,8 @@ namespace DevelPlatform
                 message.AppendLine();
 
                 Console.WriteLine(message.ToString());
-            } else
+            }
+            else
                 usage();
 
             Console.WriteLine("Press any key for exit...");
