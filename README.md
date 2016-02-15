@@ -14,8 +14,8 @@ C помощью класса V8File реализована функционал
 В качестве примера использования библиотеки добавлена консольная утилита со следующим списком доступных команд:
 
 V8Formats Version 1.0 Copyright (c)
- YPermitin (ypermitin@yandex.ru) www.develplatform.ru
- PSPlehanov (psplehanov@mail.ru)
+- YPermitin (ypermitin@yandex.ru) www.develplatform.ru
+- PSPlehanov (psplehanov@mail.ru)
 
 Unpack, pack, deflate and inflate 1C v8 file (*.cf),(*.epf),(*.erf)
 
@@ -33,6 +33,13 @@ V8FORMATS
 
 # Лицензия
 Разработка распостраняется по лицензии MIT. Полный текст лицензии на английском и русском языке вы найдете в репозитории.
+
+# Другие V8Unpack
+Данная разработка изначально создавалась на основе решения от Дениса Демидова disa_da2@mail.ru
+(https://www.assembla.com/spaces/V8Unpack/wiki)
+
+На базе этого решения создана более оптимизированная версия V8Unpack Сергеем Ботановым @dmpas
+(https://github.com/dmpas/v8unpack)
 
 # TODO
 В будущем добавявятся возможности работы с форматами файлов *.GRS (включая визуализацию) и *.MXL, а также оптимизация существующего кода в части использования памяти.
