@@ -5,13 +5,13 @@ using System.Runtime.InteropServices;
 // Управление общими сведениями о сборке осуществляется с помощью 
 // набора атрибутов. Измените значения этих атрибутов, чтобы изменить сведения,
 // связанные со сборкой.
-[assembly: AssemblyTitle("V8Formats")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("V8FormatsConsoleApp")]
+[assembly: AssemblyDescription("Консольное приложение для использования библиотеки V8Formats")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("V8Formats")]
-[assembly: AssemblyCopyright("Copyright ©  2016")]
-[assembly: AssemblyTrademark("")]
+[assembly: AssemblyProduct("V8FormatsConsole")]
+[assembly: AssemblyCopyright("Copyright ©  2016 Permitin Yury")]
+[assembly: AssemblyTrademark("DevelPlatform")]
 [assembly: AssemblyCulture("")]
 
 // Параметр ComVisible со значением FALSE делает типы в сборке невидимыми 

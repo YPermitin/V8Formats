@@ -49,6 +49,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="MIT-LICENSE %28ENG%29" />
+    <None Include="MIT-LICENSE %28RUS%29" />
+    <None Include="README.md" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="V8FormatsLibrary\V8FormatsLibrary.csproj">

@@ -6,12 +6,12 @@ using System.Runtime.InteropServices;
 // набора атрибутов. Измените значения этих атрибутов, чтобы изменить сведения,
 // связанные со сборкой.
 [assembly: AssemblyTitle("V8FormatsLibrary")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Библиотеки на .NET для работы с форматами файлов платформы 1С:Предприятие 8.x")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("V8FormatsLibrary")]
-[assembly: AssemblyCopyright("Copyright ©  2016")]
-[assembly: AssemblyTrademark("")]
+[assembly: AssemblyProduct("V8Formats")]
+[assembly: AssemblyCopyright("Copyright © 2016 Permitin Yury")]
+[assembly: AssemblyTrademark("DevelPlatform")]
 [assembly: AssemblyCulture("")]
 
 // Параметр ComVisible со значением FALSE делает типы в сборке невидимыми 
