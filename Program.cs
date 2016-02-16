@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
-
-using DevelPlatform.OneCEUtils.V8Formats;
-using System.IO;
 
 namespace DevelPlatform
 {
@@ -63,7 +57,7 @@ namespace DevelPlatform
             }
             else if (cur_mode == "-inflate" || cur_mode == "-i" || cur_mode == "-und" || cur_mode == "-undeflate")
             {
-                OneCEUtils.V8Formats.V8Formats.V8File V8File = new OneCEUtils.V8Formats.V8Formats.V8File();
+                OneCEUtils.V8Formats.V8Formats.V8File V8File = new OneCEUtils.V8Formats.V8Formats.V8File();                
                 V8File.Inflate(args[1], args[2], true);
             }
             else if (cur_mode == "-deflate" || cur_mode == "-d")

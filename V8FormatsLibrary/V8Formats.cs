@@ -8,37 +8,61 @@ using DevelPlatform.SpecialTypes;
 namespace DevelPlatform.OneCEUtils.V8Formats
 {
     public class V8Formats
-    {        
-        public static readonly string V8P_VERSION = "1.0";
+    {
+        /// <summary>
+        /// Текущая версия библиотеки V8Formats.
+        /// </summary>
+        public static readonly string V8P_VERSION = "1.0.3";
+        /// <summary>
+        /// Авторы библиотеки.
+        /// </summary>
         public static readonly string V8P_RIGHT = "YPermitin (ypermitin@yandex.ru) www.develplatform.ru\n PSPlehanov (psplehanov@mail.ru)";
 
         public class V8File : IDisposable
         {
             #region global
-            
-            // Максимальный размер блока в памяти.
-            // Используется если режим работы установлен в OPTIMAL.
-            // В случае, если размер обрабатываемого блока превышает заданную величину,
-            // то данные сохраняются во временный файл.
-            // По умолчанию 1 МБ
-            public const int MAX_BLOCK_SIZE_IN_MEMORY_BYTES = 1048576;
-            public const int MAX_FILE_SIZE = 209715200;
-            public static UInt32 V8_DEFAULT_PAGE_SIZE = 512;
 
+            /// <summary>
+            /// Максимальный размер блока в памяти.
+            /// Используется если режим работы установлен в OPTIMAL.
+            /// В случае, если размер обрабатываемого блока превышает заданную величину,
+            /// то данные сохраняются во временный файл.
+            /// По умолчанию 1 МБ
+            /// </summary>
+            public const int MAX_BLOCK_SIZE_IN_MEMORY_BYTES = 1048576;
+            /// <summary>
+            /// Максимальный размер файла для обработки в оперативной памяти.
+            /// Если входящий файл имеет больший размер, то 
+            /// автоматически режим работы (OperationMode) переключается
+            /// в FileSystem
+            /// </summary>
+            public const int MAX_FILE_SIZE = 209715200;
+            /// <summary>
+            /// Стандартный размер блока данных в байтах для форматов файлов CF, EPF и ERF.
+            /// </summary>
+            public static UInt32 V8_DEFAULT_PAGE_SIZE = 512;
+            /// <summary>
+            /// Константа, обозначающая некую «пустоту» – это число 0x7fffffff.
+            /// Когда мы собираем документ из блоков, то смотрим в заголовке на адрес следующего блока. Если он равен 0x7fffffff, то «следующего» блока нет, этот – последний.
+            /// </summary>
             private static UInt32 V8_FF_SIGNATURE = 0x7fffffff;
-            
+
             #endregion
 
             #region variables                     
-                            
+
+            /// <summary>
+            /// Режим обработки входящих данных
+            /// </summary>   
             public Mode OperationMode { set; get; }
-            stFileHeader FileHeader;
-            List<stElemAddr> ElemsAddrs;
-            List<CV8Elem> Elems;
-            bool IsDataPacked;
+
+            private stFileHeader FileHeader;
+            private List<stElemAddr> ElemsAddrs;
+            private List<CV8Elem> Elems;
+            private bool IsDataPacked;
 
             private V8File _parentV8File;
-            public V8File ParentV8File
+            private V8File ParentV8File
             {
                 get
                 {
@@ -46,7 +70,7 @@ namespace DevelPlatform.OneCEUtils.V8Formats
                 }
             }
             private Guid _objectId;
-            public Guid ObjectId
+            private Guid ObjectId
             {
                 get
                 {
@@ -54,7 +78,7 @@ namespace DevelPlatform.OneCEUtils.V8Formats
                 }
             }
             private string _tmpFolder;
-            public string tmpFolder
+            private string tmpFolder
             {
                 get
                 {
@@ -76,7 +100,7 @@ namespace DevelPlatform.OneCEUtils.V8Formats
 
             #region structures
 
-            struct stFileHeader
+            private struct stFileHeader
             {
                 byte[] next_page_addr;
                 byte[] page_size;
@@ -120,7 +144,7 @@ namespace DevelPlatform.OneCEUtils.V8Formats
                 }
             };
 
-            public struct stElemAddr
+            private struct stElemAddr
             {
                 public UInt32 elem_header_addr;
                 public UInt32 elem_data_addr;
@@ -166,7 +190,7 @@ namespace DevelPlatform.OneCEUtils.V8Formats
                 }
             };
 
-            struct stBlockHeader
+            private struct stBlockHeader
             {
                 public byte EOL_0D;
                 public byte EOL_0A;
@@ -358,6 +382,9 @@ namespace DevelPlatform.OneCEUtils.V8Formats
 
             #region publicMethods
 
+            /// <summary>
+            /// Распаковка произвольных файлов
+            /// </summary> 
             public void Inflate(string in_filename, string out_filename, bool enableNewCode = true)
             {
                 if (!File.Exists(in_filename))
@@ -384,6 +411,9 @@ namespace DevelPlatform.OneCEUtils.V8Formats
                 }
             }
 
+            /// <summary>
+            /// Сжатие произвольных файлов
+            /// </summary>
             public void Deflate(string in_filename, string out_filename, bool enableNewCode = true)
             {
                 if (!File.Exists(in_filename))
@@ -410,6 +440,9 @@ namespace DevelPlatform.OneCEUtils.V8Formats
                 }
             }
 
+            /// <summary>
+            /// Распаковка файла в файловую структуру с минимальной детализацией
+            /// </summary>
             public void UnpackToFolder(string filenameIn, string dirName, string UnpackElemWithName = null, bool printProgress = false, bool enableNewCode = true)
             {
 
@@ -480,6 +513,9 @@ namespace DevelPlatform.OneCEUtils.V8Formats
                 ClearTempData();
             }
 
+            /// <summary>
+            /// Упаковка файла из файловой структуры с минимальной детализацией
+            /// </summary>
             public void PackFromFolder(string dirname, string outFileName, bool enableNewCode = true)
             {
                 string filename;
@@ -528,6 +564,9 @@ namespace DevelPlatform.OneCEUtils.V8Formats
                 ClearTempData();
             }
 
+            /// <summary>
+            /// Распаковка файла в файловую структуру с подробной детализацией детализацией
+            /// </summary>
             public void Parse(string filename, string dirname, int level = 0, bool enableNewCode = true)
             {
                 FileInfo filePath = new FileInfo(filename);
@@ -548,6 +587,9 @@ namespace DevelPlatform.OneCEUtils.V8Formats
                 ClearTempData();
             }
 
+            /// <summary>
+            /// Упаковка файла из файловой структуры с подробной детализацией детализацией
+            /// </summary>
             public void Build(string dirName, string filename, int level = 0, bool enableNewCode = true)
             {
                 LoadFileFromFolder(dirName, true);
@@ -1705,10 +1747,32 @@ namespace DevelPlatform.OneCEUtils.V8Formats
                 #endregion
             }
 
+            /// <summary>
+            /// Варианты работы с входящими данными.
+            /// </summary>
             public enum Mode
             {
+                /// <summary>
+                /// Режим обработки данных выбирается автоматически (в памяти или через файловую систему). 
+                /// Если размер входных данных больше 200 МБ, то работа выполняется через временные файлы, 
+                /// иначе по максимуму используется оперативная память.
+                ///  При обработке блоков также выполняется проверка. Если размер блока больше 1МБ, 
+                /// то для его обработки будет использована файловая система. Это значение по умолчанию.
+                /// </summary>
                 Optimal,
+
+                /// <summary>
+                /// Все операции выполняются только в оперативной памятьи.
+                /// 
+                /// ВНИМАНИЕ: При очень больших обрабатываемых объемах данных 
+                /// приложению просто может не хватить выделяемого объема памяти!
+                /// </summary>
                 MemoryUsage,
+
+                /// <summary>
+                /// Все операции выполняются только в файловой системе. 
+                /// Оперативная память используется по минимум.
+                /// </summary>
                 FileSystem
             }
 
@@ -1755,14 +1819,16 @@ namespace DevelPlatform.OneCEUtils.V8Formats
             #endregion
         }
 
-        public class GRS
+        #region inDevelop
+        private class GRS
         {
             // Класс находится в разработке...
         }
 
-        public class MXL
+        private class MXL
         {
             // Класс находится в разработке...
         }
+        #endregion
     }
 }
