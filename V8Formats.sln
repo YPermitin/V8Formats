@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "V8FormatsConsoleApp", "V8FormatsConsoleApp.csproj", "{324584EB-388B-4FF4-9502-AC8D096A5F8F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "V8FormatsLibrary", "V8FormatsLibrary\V8FormatsLibrary.csproj", "{58D484B4-E9BC-4728-A4F6-905731074EFC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{324584EB-388B-4FF4-9502-AC8D096A5F8F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{324584EB-388B-4FF4-9502-AC8D096A5F8F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{324584EB-388B-4FF4-9502-AC8D096A5F8F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{324584EB-388B-4FF4-9502-AC8D096A5F8F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{58D484B4-E9BC-4728-A4F6-905731074EFC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{58D484B4-E9BC-4728-A4F6-905731074EFC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{58D484B4-E9BC-4728-A4F6-905731074EFC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{58D484B4-E9BC-4728-A4F6-905731074EFC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

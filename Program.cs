@@ -113,7 +113,7 @@ namespace DevelPlatform
                 message.AppendLine();
                 message.AppendLine(":END");
 
-                Console.WriteLine(message.ToString()); 
+                Console.WriteLine(message.ToString());
             }
             else if (cur_mode == "-example" || cur_mode == "-e")
             {
