@@ -42,7 +42,7 @@ V8FORMATS
 Данная разработка изначально создавалась на основе решения от Дениса Демидова disa_da2@mail.ru
 (https://www.assembla.com/spaces/V8Unpack/wiki)
 
-На базе этого решения создана более оптимизированная версия V8Unpack Сергеем Ботановым @dmpas
+На базе этого решения создана более оптимизированная версия V8Unpack Сергеем Батановым @dmpas
 (https://github.com/dmpas/v8unpack)
 
 # TODO
